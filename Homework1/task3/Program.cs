@@ -37,7 +37,7 @@ namespace HW1
 
                 //finding the index and the value of the minimum element in the array
                 int min_index = 0;
-                int min_value = 2147483647;
+                int min_value = int.MaxValue;
                 for (int i = 0; i < array_size; i++)
                 {
                     if (min_value > arr[i])

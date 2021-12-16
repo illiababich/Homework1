@@ -13,8 +13,6 @@ namespace task1
             {
                 sum += j * (int)Char.GetNumericValue(input_string[i]);
             }
-            Console.WriteLine(sum);
-            Console.WriteLine(sum % 11);
             int d10 = 11 - (sum % 11);
             string ISBN;
             if (d10 == 10)
@@ -25,7 +23,6 @@ namespace task1
             {
                 ISBN = input_string + d10;
             }
-            Console.WriteLine(d10);
             Console.WriteLine("ISBN: " + ISBN);
         }
     }
