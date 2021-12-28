@@ -19,15 +19,10 @@ namespace two2s
                     number_converted_to_ternary.Add(temp % 3);
                     temp /= 3;
                 }
-                int counter = 0;
-                for (int j = 0; j < number_converted_to_ternary.Count; j++)
-                {
-                    if (number_converted_to_ternary[j] == 2)
-                    {
-                        counter++;
-                    }
-                }
-                if (counter == 2)
+
+                List<int> twotwos = number_converted_to_ternary.FindAll(i => i == 2);
+                
+                if (twotwos.Count == 2)
                 {
                     Console.Write(i + " ");
                 }
