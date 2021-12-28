@@ -6,6 +6,25 @@ namespace HW1
 {
     class Program
     {
+        static void Logic(int min_index, int max_index, int[] arr)
+        {
+            int result = 0;
+            for (int i = min_index; i <= max_index; i++)
+            {
+                if (i == max_index)
+                {
+                    Console.Write(arr[i] + " = ");
+                    result += arr[i];
+                }
+                else
+                {
+                    Console.Write(arr[i] + " + ");
+                    result += arr[i];
+                }
+            }
+            Console.WriteLine(result + ".");
+        }
+
         static void Main(string[] args)
         {
             Console.Write("Enter the array size: ");
@@ -15,103 +34,33 @@ namespace HW1
             if (array_size >= 2)
             {
                 // array initialization
-                List<int> arr = new List<int>();
+                int[] arr = new int[array_size];
                 for (int i = 0; i < array_size; i++)
                 {
                     string a = Console.ReadLine();
                     int b = int.Parse(a);
-                    arr.Add(b);
-                }
-                Console.Write("The original array: [");
-                for (int i = 0; i < array_size; i++)
-                {
-                    if (i + 1 != array_size)
-                    {
-                        Console.Write(arr[i] + ", ");
-                    }
-                    else
-                    {
-                        Console.Write(arr[i] + "].");
-                    }
+                    arr[i] = b;
                 }
 
-                //finding the index and the value of the minimum element in the array
-                int min_index = 0;
-                int min_value = int.MaxValue;
-                for (int i = 0; i < array_size; i++)
+                // original array output
+                Console.Write("The original array: ");
+                foreach (var item in arr)
                 {
-                    if (min_value > arr[i])
-                    {
-                        min_value = arr[i];
-                    }
+                    Console.Write(item + " ");
                 }
 
-                for (int i = 0; i < array_size; i++)
-                {
-                    if (arr[i] == min_value)
-                    {
-                        min_index = i;
-                        break;
-                    }
-                }
-                //Console.WriteLine("min value: " + min_value + ", index: " + min_index);
+                int arr_min = Array.FindIndex(arr, i => i == arr.Min()); //finding the index and the value of the minimum element in the array
+                int arr_max = Array.FindLastIndex(arr, i => i == arr.Max()); //finding the index and the value of the maximum element in the array
 
-                //finding the index and the value of the maximum element in the array
-                int max_index = 0;
-                int max_value = -2147483647;
-                for (int i = 0; i < array_size; i++)
-                {
-                    if (max_value < arr[i])
-                    {
-                        max_value = arr[i];
-                    }
-                }
+                Console.WriteLine(" The sum of the required elements: ");
 
-                for (int i = array_size - 1; i >= 0; --i)
+                if (arr_max > arr_min)
                 {
-                    if (arr[i] == max_value)
-                    {
-                        max_index = i;
-                        break;
-                    }
-                }
-                //Console.WriteLine("max value: " + max_value + ", index: " + max_index);
-
-                Console.Write(" The sum of the required elements: ");
-                int result = 0;
-                if (max_index > min_index)
-                {
-                    for (int i = min_index; i <= max_index; i++)
-                    {
-                        if (i == max_index)
-                        {
-                            Console.Write(arr[i] + " = ");
-                            result += arr[i];
-                        }
-                        else
-                        {
-                            Console.Write(arr[i] + " + ");
-                            result += arr[i];
-                        }
-                    }
-                    Console.WriteLine(result + ".");
+                    Logic(arr_min, arr_max, arr);
                 }
                 else
                 {
-                    for (int i = max_index; i <= min_index; i++)
-                    {
-                        if (i == min_index)
-                        {
-                            Console.Write(arr[i] + " = ");
-                            result += arr[i];
-                        }
-                        else
-                        {
-                            Console.Write(arr[i] + " + ");
-                            result += arr[i];
-                        }
-                    }
-                    Console.WriteLine(result + ".");
+                    Logic(arr_max, arr_min, arr);
                 }
             }
             else
